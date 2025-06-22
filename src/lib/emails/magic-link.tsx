@@ -102,7 +102,8 @@ const button = {
 	textDecoration: 'none',
 	textAlign: 'center' as const,
 	display: 'block',
-	width: '100%',
+	width: '80%',
+	margin: '0 auto',
 	padding: '12px 32px'
 };
 

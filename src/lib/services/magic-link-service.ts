@@ -39,19 +39,19 @@ export class MagicLinkService {
 	): Promise<{ success: boolean; error?: string }> {
 		try {
 			// Find the user by email
-			const user = await db.select().from(users).where(eq(users.email, email)).limit(1);
+			const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
 
-			if (user.length === 0) {
+			if (!user) {
 				return { success: false, error: 'Ingen bruker funnet med denne e-postadressen' };
 			}
 
 			// Create the magic link
-			const magicLinkUrl = await this.createMagicLink(user[0].id, baseUrl);
+			const magicLinkUrl = await this.createMagicLink(user.id, baseUrl);
 
 			// Send the email
 			const emailResult = await EmailService.sendMagicLinkEmail({
 				to: email,
-				name: user[0].name,
+				name: user.name,
 				magicLinkUrl
 			});
 
