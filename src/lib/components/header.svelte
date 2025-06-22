@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getUser } from '$lib/contexts/user-context';
-	import { Plus, ExternalLink, Users, Menu, X } from '@lucide/svelte';
+	import { Plus, ExternalLink, Users, Menu, X, Calendar } from '@lucide/svelte';
 	import ThemeSwitcher from './theme-switcher.svelte';
 
 	let user = getUser();
@@ -32,6 +32,13 @@
 				>
 					<Plus class="size-4" />
 					<span>Nytt møte</span>
+				</a>
+				<a
+					href="/timeplan"
+					class="text-foreground hover:text-primary flex items-center gap-2 text-sm hover:underline"
+				>
+					<Calendar class="size-4" />
+					<span>Timeplan</span>
 				</a>
 			{/if}
 			<a
@@ -88,6 +95,14 @@
 					>
 						<Plus class="size-4" />
 						<span>Nytt møte</span>
+					</a>
+					<a
+						href="/timeplan"
+						onclick={closeMenu}
+						class="text-foreground hover:bg-muted flex items-center gap-3 p-3 text-sm"
+					>
+						<Calendar class="size-4" />
+						<span>Timeplan</span>
 					</a>
 				{/if}
 				<a
