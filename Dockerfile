@@ -8,7 +8,6 @@ RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 COPY . .
 
-# Use secrets properly - set them as environment variables in a single RUN command
 RUN --mount=type=secret,id=database_url \
     --mount=type=secret,id=database_auth_token \
     --mount=type=secret,id=base_url \
