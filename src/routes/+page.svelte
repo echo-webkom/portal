@@ -348,8 +348,6 @@
 		<Pill status="Møtt opp" />
 		<Pill status="Kommer" />
 		<Pill status="Fravær" />
-		<Pill status="Unnskyldt" />
-		<Pill status="Dro tidlig" />
 	</div>
 </div>
 

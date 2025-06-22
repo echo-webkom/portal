@@ -74,6 +74,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container: ghcr.io/railwayapp/cli:latest
+    needs: build
 
     env:
       SVC_ID: b8f52557-1f30-47d7-84c7-61d99d3039e1
