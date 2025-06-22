@@ -18,7 +18,7 @@
 		{#each data.users as user (user.id)}
 			<div class="bg-card hover:bg-muted p-6 transition-colors">
 				<div class="flex items-start justify-between">
-					<div class="flex-1 min-w-0">
+					<div class="min-w-0 flex-1">
 						<h3 class="text-foreground text-lg font-semibold break-words">
 							<a
 								href="/profil/{user.id}"
