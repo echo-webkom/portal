@@ -5,7 +5,8 @@ import { eq } from 'drizzle-orm';
 import * as schema from './src/lib/db/schemas';
 
 const client = createClient({
-	url: process.env.DATABASE_URL!
+	url: process.env.DATABASE_URL!,
+	authToken: process.env.DATABASE_AUTH_TOKEN || undefined
 });
 const db = drizzle(client, {
 	casing: 'snake_case',
