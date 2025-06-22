@@ -1,0 +1,168 @@
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { User, Calendar } from '@lucide/svelte';
+	import Button from '$lib/components/button.svelte';
+	import Pill from '$lib/components/pill.svelte';
+	import Label from '$lib/components/label.svelte';
+	import Input from '$lib/components/input.svelte';
+
+	let { data, form } = $props();
+
+	let isSubmitting = $state(false);
+
+	function formatDateTime(date: Date): string {
+		return new Date(date).toLocaleDateString('no-NO', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit'
+		});
+	}
+</script>
+
+<svelte:head>
+	<title>{data.user.name} - Profil - Webkom</title>
+</svelte:head>
+
+<div class="mx-auto max-w-3xl">
+	<h1 class="text-foreground mb-8 text-3xl font-bold">
+		{data.isOwnProfile ? 'Min profil' : `${data.user.name}s profil`}
+	</h1>
+
+	<div class="space-y-8">
+		<!-- Profile Edit Form -->
+		<div>
+			<div class="mb-6 flex items-center gap-2">
+				<User size={20} class="text-muted-foreground" />
+				<h2 class="text-foreground text-xl font-semibold">Profilinformasjon</h2>
+			</div>
+
+			{#if data.isOwnProfile}
+				{#if form?.message}
+					<div
+						class="mb-6 p-4 {form.message.includes('oppdatere') || form.message.includes('bruk')
+							? 'bg-red-50 text-red-800'
+							: 'bg-green-50 text-green-800'}"
+					>
+						{form.message}
+					</div>
+				{/if}
+
+				{#if form?.success}
+					<div class="mb-6 bg-green-50 p-4 text-green-800">Profil oppdatert!</div>
+				{/if}
+
+				<form
+					method="POST"
+					action="?/updateProfile"
+					class="space-y-6"
+					use:enhance={() => {
+						isSubmitting = true;
+						return async ({ update }) => {
+							await update();
+							isSubmitting = false;
+						};
+					}}
+				>
+					<div>
+						<Label for="name" required>Navn</Label>
+						<Input
+							type="text"
+							id="name"
+							name="name"
+							value={form?.name || data.user.name}
+							required
+						/>
+					</div>
+
+					<div>
+						<Label for="email" required>E-post</Label>
+						<Input
+							type="email"
+							id="email"
+							name="email"
+							value={form?.email || data.user.email}
+							required
+						/>
+					</div>
+
+					<div class="flex items-center justify-between pt-4">
+						<Button variant="outline" type="submit" formaction="?/logout">Logg ut</Button>
+						<Button type="submit" disabled={isSubmitting}>
+							{isSubmitting ? 'Lagrer...' : 'Lagre endringer'}
+						</Button>
+					</div>
+				</form>
+			{:else}
+				<div class="space-y-4">
+					<div>
+						<Label>Navn</Label>
+						<div class="bg-muted text-foreground px-3 py-2">{data.user.name}</div>
+					</div>
+					<div>
+						<Label>E-post</Label>
+						<div class="bg-muted text-foreground px-3 py-2">{data.user.email}</div>
+					</div>
+				</div>
+			{/if}
+		</div>
+
+		<!-- Recent Meetings -->
+		<div>
+			<div class="mb-6 flex items-center gap-2">
+				<Calendar size={20} class="text-muted-foreground" />
+				<h2 class="text-foreground text-xl font-semibold">Siste møter</h2>
+			</div>
+
+			{#if data.recentAttendance.length > 0}
+				<div class="border-border overflow-hidden border-b">
+					<table class="min-w-full">
+						<thead class="bg-table-header border-border border-b">
+							<tr>
+								<th
+									class="text-muted-foreground px-4 py-3 text-left text-xs font-medium tracking-wider uppercase"
+								>
+									Møte
+								</th>
+								<th
+									class="text-muted-foreground px-4 py-3 text-left text-xs font-medium tracking-wider uppercase"
+								>
+									Dato
+								</th>
+								<th
+									class="text-muted-foreground px-4 py-3 text-center text-xs font-medium tracking-wider uppercase"
+								>
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody class="bg-card">
+							{#each data.recentAttendance as record (record.attendance.id)}
+								<tr class="hover:bg-table-row-hover border-border border-t">
+									<td class="px-4 py-4">
+										<div>
+											<div class="text-foreground text-sm font-medium">{record.meeting.title}</div>
+										</div>
+									</td>
+									<td class="text-muted-foreground px-4 py-4 text-sm">
+										{formatDateTime(record.meeting.startTime)}
+									</td>
+									<td class="px-4 py-4 text-center">
+										<Pill status={record.status.name} />
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="text-muted-foreground py-8 text-center">
+					{data.isOwnProfile
+						? 'Du har ikke deltatt på noen møter ennå.'
+						: `${data.user.name} har ikke deltatt på noen møter ennå.`}
+				</p>
+			{/if}
+		</div>
+	</div>
+</div>

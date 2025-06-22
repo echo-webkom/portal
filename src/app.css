@@ -1,0 +1,375 @@
+@import 'tailwindcss';
+
+:root {
+	--color-primary: 31 41 55;
+	--color-primary-foreground: 255 255 255;
+	--color-secondary: 241 245 249;
+	--color-secondary-foreground: 15 23 42;
+	--color-background: 255 255 255;
+	--color-foreground: 15 23 42;
+	--color-muted: 241 245 249;
+	--color-muted-foreground: 100 116 139;
+	--color-card: 255 255 255;
+	--color-card-foreground: 15 23 42;
+	--color-border: 226 232 240;
+	--color-input: 226 232 240;
+	--color-ring: 59 130 246;
+	--color-accent: 241 245 249;
+	--color-accent-foreground: 15 23 42;
+	--color-destructive: 239 68 68;
+	--color-destructive-foreground: 255 255 255;
+	--color-success: 34 197 94;
+	--color-success-foreground: 255 255 255;
+	--color-warning: 251 191 36;
+	--color-warning-foreground: 0 0 0;
+	--color-info: 59 130 246;
+	--color-info-foreground: 255 255 255;
+	--color-table-header: 249 250 251;
+	--color-table-row-hover: 249 250 251;
+	--color-dropdown: 255 255 255;
+	--color-dropdown-hover: 249 250 251;
+}
+
+[data-theme='air'] {
+	--color-primary: 59 130 246;
+	--color-primary-foreground: 255 255 255;
+	--color-secondary: 226 232 240;
+	--color-secondary-foreground: 51 65 85;
+	--color-background: 248 250 252;
+	--color-foreground: 51 65 85;
+	--color-muted: 226 232 240;
+	--color-muted-foreground: 100 116 139;
+	--color-card: 255 255 255;
+	--color-card-foreground: 51 65 85;
+	--color-border: 203 213 225;
+	--color-input: 203 213 225;
+	--color-ring: 59 130 246;
+	--color-accent: 226 232 240;
+	--color-accent-foreground: 51 65 85;
+	--color-destructive: 239 68 68;
+	--color-destructive-foreground: 255 255 255;
+	--color-success: 34 197 94;
+	--color-success-foreground: 255 255 255;
+	--color-warning: 251 191 36;
+	--color-warning-foreground: 0 0 0;
+	--color-info: 59 130 246;
+	--color-info-foreground: 255 255 255;
+	--color-table-header: 241 245 249;
+	--color-table-row-hover: 241 245 249;
+	--color-dropdown: 255 255 255;
+	--color-dropdown-hover: 241 245 249;
+}
+
+[data-theme='dark'] {
+	--color-primary: 75 75 75;
+	--color-primary-foreground: 255 255 255;
+	--color-secondary: 15 15 15;
+	--color-secondary-foreground: 229 231 235;
+	--color-background: 8 8 8;
+	--color-foreground: 250 250 250;
+	--color-muted: 20 20 20;
+	--color-muted-foreground: 140 140 140;
+	--color-card: 15 15 15;
+	--color-card-foreground: 250 250 250;
+	--color-border: 40 40 40;
+	--color-input: 40 40 40;
+	--color-ring: 200 200 200;
+	--color-accent: 30 30 30;
+	--color-accent-foreground: 250 250 250;
+	--color-destructive: 239 68 68;
+	--color-destructive-foreground: 255 255 255;
+	--color-success: 34 197 94;
+	--color-success-foreground: 255 255 255;
+	--color-warning: 251 191 36;
+	--color-warning-foreground: 0 0 0;
+	--color-info: 156 163 175;
+	--color-info-foreground: 255 255 255;
+	--color-table-header: 25 25 25;
+	--color-table-row-hover: 30 30 30;
+	--color-dropdown: 15 15 15;
+	--color-dropdown-hover: 25 25 25;
+}
+
+[data-theme='neon'] {
+	--color-primary: 236 72 153;
+	--color-primary-foreground: 255 255 255;
+	--color-secondary: 20 20 30;
+	--color-secondary-foreground: 226 232 240;
+	--color-background: 15 15 25;
+	--color-foreground: 248 250 252;
+	--color-muted: 30 30 45;
+	--color-muted-foreground: 156 163 175;
+	--color-card: 25 25 40;
+	--color-card-foreground: 248 250 252;
+	--color-border: 168 85 247;
+	--color-input: 45 45 65;
+	--color-ring: 236 72 153;
+	--color-accent: 168 85 247;
+	--color-accent-foreground: 255 255 255;
+	--color-destructive: 239 68 68;
+	--color-destructive-foreground: 255 255 255;
+	--color-success: 34 197 94;
+	--color-success-foreground: 255 255 255;
+	--color-warning: 251 191 36;
+	--color-warning-foreground: 0 0 0;
+	--color-info: 59 130 246;
+	--color-info-foreground: 255 255 255;
+	--color-table-header: 35 35 55;
+	--color-table-row-hover: 40 40 60;
+	--color-dropdown: 25 25 40;
+	--color-dropdown-hover: 35 35 55;
+}
+
+/* Removed transitions as requested */
+
+/* Apply theme to body */
+body {
+	background-color: rgb(var(--color-background));
+	color: rgb(var(--color-foreground));
+}
+
+/* Custom theme color classes */
+@layer utilities {
+	/* Background colors */
+	.bg-primary {
+		background-color: rgb(var(--color-primary));
+	}
+	.bg-primary-foreground {
+		background-color: rgb(var(--color-primary-foreground));
+	}
+	.bg-secondary {
+		background-color: rgb(var(--color-secondary));
+	}
+	.bg-secondary-foreground {
+		background-color: rgb(var(--color-secondary-foreground));
+	}
+	.bg-background {
+		background-color: rgb(var(--color-background));
+	}
+	.bg-foreground {
+		background-color: rgb(var(--color-foreground));
+	}
+	.bg-muted {
+		background-color: rgb(var(--color-muted));
+	}
+	.bg-muted-foreground {
+		background-color: rgb(var(--color-muted-foreground));
+	}
+	.bg-card {
+		background-color: rgb(var(--color-card));
+	}
+	.bg-card-foreground {
+		background-color: rgb(var(--color-card-foreground));
+	}
+	.bg-accent {
+		background-color: rgb(var(--color-accent));
+	}
+	.bg-accent-foreground {
+		background-color: rgb(var(--color-accent-foreground));
+	}
+	.bg-destructive {
+		background-color: rgb(var(--color-destructive));
+	}
+	.bg-destructive-foreground {
+		background-color: rgb(var(--color-destructive-foreground));
+	}
+	.bg-success {
+		background-color: rgb(var(--color-success));
+	}
+	.bg-success-foreground {
+		background-color: rgb(var(--color-success-foreground));
+	}
+	.bg-warning {
+		background-color: rgb(var(--color-warning));
+	}
+	.bg-warning-foreground {
+		background-color: rgb(var(--color-warning-foreground));
+	}
+	.bg-info {
+		background-color: rgb(var(--color-info));
+	}
+	.bg-info-foreground {
+		background-color: rgb(var(--color-info-foreground));
+	}
+	.bg-table-header {
+		background-color: rgb(var(--color-table-header));
+	}
+	.bg-table-row-hover {
+		background-color: rgb(var(--color-table-row-hover));
+	}
+	.bg-dropdown {
+		background-color: rgb(var(--color-dropdown));
+	}
+	.bg-dropdown-hover {
+		background-color: rgb(var(--color-dropdown-hover));
+	}
+
+	/* Text colors */
+	.text-primary {
+		color: rgb(var(--color-primary));
+	}
+	.text-primary-foreground {
+		color: rgb(var(--color-primary-foreground));
+	}
+	.text-secondary {
+		color: rgb(var(--color-secondary));
+	}
+	.text-secondary-foreground {
+		color: rgb(var(--color-secondary-foreground));
+	}
+	.text-background {
+		color: rgb(var(--color-background));
+	}
+	.text-foreground {
+		color: rgb(var(--color-foreground));
+	}
+	.text-muted {
+		color: rgb(var(--color-muted));
+	}
+	.text-muted-foreground {
+		color: rgb(var(--color-muted-foreground));
+	}
+	.text-card {
+		color: rgb(var(--color-card));
+	}
+	.text-card-foreground {
+		color: rgb(var(--color-card-foreground));
+	}
+	.text-accent {
+		color: rgb(var(--color-accent));
+	}
+	.text-accent-foreground {
+		color: rgb(var(--color-accent-foreground));
+	}
+	.text-destructive {
+		color: rgb(var(--color-destructive));
+	}
+	.text-destructive-foreground {
+		color: rgb(var(--color-destructive-foreground));
+	}
+	.text-success {
+		color: rgb(var(--color-success));
+	}
+	.text-success-foreground {
+		color: rgb(var(--color-success-foreground));
+	}
+	.text-warning {
+		color: rgb(var(--color-warning));
+	}
+	.text-warning-foreground {
+		color: rgb(var(--color-warning-foreground));
+	}
+	.text-info {
+		color: rgb(var(--color-info));
+	}
+	.text-info-foreground {
+		color: rgb(var(--color-info-foreground));
+	}
+
+	/* Border colors */
+	.border-primary {
+		border-color: rgb(var(--color-primary));
+	}
+	.border-secondary {
+		border-color: rgb(var(--color-secondary));
+	}
+	.border-background {
+		border-color: rgb(var(--color-background));
+	}
+	.border-foreground {
+		border-color: rgb(var(--color-foreground));
+	}
+	.border-muted {
+		border-color: rgb(var(--color-muted));
+	}
+	.border-muted-foreground {
+		border-color: rgb(var(--color-muted-foreground));
+	}
+	.border-card {
+		border-color: rgb(var(--color-card));
+	}
+	.border-accent {
+		border-color: rgb(var(--color-accent));
+	}
+	.border-destructive {
+		border-color: rgb(var(--color-destructive));
+	}
+	.border-success {
+		border-color: rgb(var(--color-success));
+	}
+	.border-warning {
+		border-color: rgb(var(--color-warning));
+	}
+	.border-info {
+		border-color: rgb(var(--color-info));
+	}
+	.border-input {
+		border-color: rgb(var(--color-input));
+	}
+	.border-border {
+		border-color: rgb(var(--color-border));
+	}
+
+	/* Ring colors */
+	.ring-primary {
+		--tw-ring-color: rgb(var(--color-primary));
+	}
+	.ring-ring {
+		--tw-ring-color: rgb(var(--color-ring));
+	}
+
+	/* Hover states */
+	.hover\:bg-primary:hover {
+		background-color: rgb(var(--color-primary));
+	}
+	.hover\:bg-muted:hover {
+		background-color: rgb(var(--color-muted));
+	}
+	.hover\:bg-table-row-hover:hover {
+		background-color: rgb(var(--color-table-row-hover));
+	}
+	.hover\:bg-dropdown-hover:hover {
+		background-color: rgb(var(--color-dropdown-hover));
+	}
+	.hover\:text-primary:hover {
+		color: rgb(var(--color-primary));
+	}
+	.hover\:text-foreground:hover {
+		color: rgb(var(--color-foreground));
+	}
+
+	/* Divide colors */
+	.divide-border > :not([hidden]) ~ :not([hidden]) {
+		border-color: rgb(var(--color-border));
+	}
+}
+
+@theme inline {
+	--color-primary: var(--color-primary);
+	--color-primary-foreground: var(--color-primary-foreground);
+	--color-secondary: var(--color-secondary);
+	--color-secondary-foreground: var(--color-secondary-foreground);
+	--color-background: var(--color-background);
+	--color-foreground: var(--color-foreground);
+	--color-muted: var(--color-muted);
+	--color-muted-foreground: var(--color-muted-foreground);
+	--color-card: var(--color-card);
+	--color-card-foreground: var(--color-card-foreground);
+	--color-border: var(--color-border);
+	--color-input: var(--color-input);
+	--color-ring: var(--color-ring);
+	--color-accent: var(--color-accent);
+	--color-accent-foreground: var(--color-accent-foreground);
+	--color-destructive: var(--color-destructive);
+	--color-destructive-foreground: var(--color-destructive-foreground);
+	--color-success: var(--color-success);
+	--color-success-foreground: var(--color-success-foreground);
+	--color-warning: var(--color-warning);
+	--color-warning-foreground: var(--color-warning-foreground);
+	--color-info: var(--color-info);
+	--color-info-foreground: var(--color-info-foreground);
+	--color-table-header: var(--color-table-header);
+	--color-table-row-hover: var(--color-table-row-hover);
+	--color-dropdown: var(--color-dropdown);
+	--color-dropdown-hover: var(--color-dropdown-hover);
+}
