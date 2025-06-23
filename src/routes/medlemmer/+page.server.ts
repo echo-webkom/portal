@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 			id: users.id,
 			name: users.name,
 			email: users.email,
+			imageUrl: users.imageUrl,
 			createdAt: users.createdAt
 		})
 		.from(users)

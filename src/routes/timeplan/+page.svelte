@@ -99,7 +99,7 @@
 	<title>Timeplan - Webkom</title>
 </svelte:head>
 
-<div>
+<div class="mx-auto max-w-7xl">
 	<div class="mb-8">
 		<h1 class="text-foreground mb-2 text-3xl font-bold">Timeplan</h1>
 		<p class="text-muted-foreground">Oversikt over møteoppmøte og status for alle medlemmer</p>
@@ -202,11 +202,37 @@
 		</table>
 	</div>
 
-	<div class="mt-6 flex flex-wrap gap-2 text-sm">
-		<span class="text-muted-foreground">Statuser:</span>
-		<Pill status="Møtt opp" />
-		<Pill status="Kommer" />
-		<Pill status="Fravær" />
+	<div class="mt-6 flex items-center justify-between">
+		<div class="flex flex-wrap gap-2 text-sm">
+			<span class="text-muted-foreground">Statuser:</span>
+			<Pill status="Møtt opp" />
+			<Pill status="Kommer" />
+			<Pill status="Fravær" />
+		</div>
+
+		{#if isLoggedIn}
+			<a
+				href="/mote/ny"
+				class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="size-4"
+				>
+					<path d="M5 12h14" />
+					<path d="m12 5 7 7-7 7" />
+				</svg>
+				Nytt møte
+			</a>
+		{/if}
 	</div>
 </div>
 

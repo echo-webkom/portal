@@ -13,6 +13,7 @@ export const users = table(
 			.$defaultFn(() => nanoid()),
 		name: text().notNull(),
 		email: text().notNull(),
+		imageUrl: text('image_url'),
 		createdAt: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()),
 		updatedAt: integer({ mode: 'timestamp' }).$onUpdateFn(() => new Date())
 	},

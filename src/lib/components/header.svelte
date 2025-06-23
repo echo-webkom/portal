@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getUser } from '$lib/contexts/user-context';
-	import { Plus, ExternalLink, Users, Menu, X, Calendar } from '@lucide/svelte';
+	import { ExternalLink, Users, Menu, X, Calendar } from '@lucide/svelte';
 	import ThemeSwitcher from './theme-switcher.svelte';
 
 	let user = getUser();
@@ -26,13 +26,6 @@
 		<!-- Desktop Navigation -->
 		<nav class="ml-6 hidden items-center space-x-6 md:flex">
 			{#if $user}
-				<a
-					href="/mote/ny"
-					class="text-foreground hover:text-primary flex items-center gap-2 text-sm hover:underline"
-				>
-					<Plus class="size-4" />
-					<span>Nytt møte</span>
-				</a>
 				<a
 					href="/timeplan"
 					class="text-foreground hover:text-primary flex items-center gap-2 text-sm hover:underline"
@@ -62,7 +55,10 @@
 
 	<div class="flex items-center gap-4">
 		{#if $user}
-			<a href="/profil/{$user.id}" class="text-foreground hover:text-primary hover:underline">
+			<a
+				href="/profil/{$user.id}"
+				class="text-foreground hover:text-primary text-sm hover:underline"
+			>
 				{$user.name}
 			</a>
 		{/if}
@@ -88,14 +84,6 @@
 		<nav class="bg-card border-border absolute top-full right-0 left-0 z-50 border-b md:hidden">
 			<div class="flex flex-col space-y-1 p-4">
 				{#if $user}
-					<a
-						href="/mote/ny"
-						onclick={closeMenu}
-						class="text-foreground hover:bg-muted flex items-center gap-3 p-3 text-sm"
-					>
-						<Plus class="size-4" />
-						<span>Nytt møte</span>
-					</a>
 					<a
 						href="/timeplan"
 						onclick={closeMenu}

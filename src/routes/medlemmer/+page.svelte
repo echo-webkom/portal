@@ -16,8 +16,26 @@
 
 	<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 		{#each data.users as user (user.id)}
-			<div class="bg-card hover:bg-muted p-6 transition-colors">
-				<div class="flex items-start justify-between">
+			<div class="bg-card hover:bg-muted border-border rounded-lg border p-6 transition-colors">
+				<div class="flex items-start gap-4">
+					<!-- Profile Picture -->
+					<div class="flex-shrink-0">
+						{#if user.imageUrl}
+							<img
+								src={user.imageUrl}
+								alt="{user.name}s profilbilde"
+								class="border-border h-16 w-16 rounded-full border-2 object-cover"
+							/>
+						{:else}
+							<div
+								class="bg-muted border-border flex h-16 w-16 items-center justify-center rounded-full border-2"
+							>
+								<Users size={24} class="text-muted-foreground" />
+							</div>
+						{/if}
+					</div>
+
+					<!-- User Info -->
 					<div class="min-w-0 flex-1">
 						<h3 class="text-foreground text-lg font-semibold break-words">
 							<a
