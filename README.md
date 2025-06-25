@@ -35,7 +35,6 @@ Required environment variables:
 
 - `DATABASE_URL` - SQLite database connection string
 - `BASE_URL` - Application base URL (for magic links)
-- `POSTMARK_SERVER_TOKEN` - Postmark API token for email sending
 
 4. Set up the database:
 
@@ -142,7 +141,3 @@ docker run -p 3000:3000 --env-file .env webkom-portal
 
 - `DATABASE_URL` - SQLite database path (e.g., `file:./app.db`)
 - `BASE_URL` - Application URL for magic links
-
-### Email Configuration
-
-- `POSTMARK_SERVER_TOKEN` - Postmark API token for email delivery

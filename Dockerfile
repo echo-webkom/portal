@@ -17,7 +17,6 @@ RUN --mount=type=secret,id=database_url \
     --mount=type=secret,id=aws_s3_access_key_id \
     --mount=type=secret,id=aws_s3_secret_access_key \
     --mount=type=secret,id=aws_s3_bucket_name \
-    --mount=type=secret,id=postmark_api_token \
     export DATABASE_URL="$(cat /run/secrets/database_url)" && \
     export DATABASE_AUTH_TOKEN="$(cat /run/secrets/database_auth_token)" && \
     export BASE_URL="$(cat /run/secrets/base_url)" && \
@@ -27,7 +26,6 @@ RUN --mount=type=secret,id=database_url \
     export AWS_S3_ACCESS_KEY_ID="$(cat /run/secrets/aws_s3_access_key_id)" && \
     export AWS_S3_SECRET_ACCESS_KEY="$(cat /run/secrets/aws_s3_secret_access_key)" && \
     export AWS_S3_BUCKET_NAME="$(cat /run/secrets/aws_s3_bucket_name)" && \
-    export POSTMARK_API_TOKEN="$(cat /run/secrets/postmark_api_token)" && \
     pnpm run build
 
 FROM node:22-alpine
