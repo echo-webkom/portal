@@ -1,27 +1,22 @@
 import { db } from '$lib/db/drizzle';
-import { users } from '$lib/db/schemas';
-import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (!locals.user) {
-		error(401, 'Du må være innlogget for å se medlemsoversikten');
-	}
-
-	// Get all users
-	const allUsers = await db
-		.select({
-			id: users.id,
-			name: users.name,
-			email: users.email,
-			imageUrl: users.imageUrl,
-			createdAt: users.createdAt
-		})
-		.from(users)
-		.orderBy(users.name);
+	const users = await db.query.users.findMany({
+		columns: {
+			id: true,
+			name: true,
+			email: true,
+			imageUrl: true,
+			createdAt: true,
+			activeFrom: true,
+			activeTo: true
+		},
+		orderBy: (users, { asc }) => [asc(users.name)]
+	});
 
 	return {
-		users: allUsers,
+		users,
 		currentUser: locals.user
 	};
 };

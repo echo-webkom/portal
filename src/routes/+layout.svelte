@@ -19,4 +19,9 @@
 	<div class="flex-1 px-4 py-8 md:px-8">
 		{@render children()}
 	</div>
+	<footer class="bg-card border-border border-t py-6">
+		<div class="text-muted-foreground mx-auto max-w-6xl px-4 text-center text-sm md:px-8">
+			Laget med ❤️ av Webkom
+		</div>
+	</footer>
 </div>

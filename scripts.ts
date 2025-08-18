@@ -123,4 +123,27 @@ if (command === 'seed') {
 	}
 
 	console.log('Seeded 15 weekly meetings starting from next Wednesday.');
+
+	// Seed roles
+	const roles = [
+		'Leder',
+		'Nestleder',
+		'Internpoliti',
+		'Teknologiansvarlig',
+		'Sosialansvarlig',
+		'HS-representant',
+		'Styrmedlem',
+		'Alumni'
+	];
+
+	for (const roleName of roles) {
+		await db
+			.insert(schema.roles)
+			.values({
+				name: roleName
+			})
+			.onConflictDoNothing();
+	}
+
+	console.log('Seeded roles.');
 }
