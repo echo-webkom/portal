@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { User } from '@lucide/svelte';
 	import Label from '$lib/components/label.svelte';
+	import type { PageData } from '../$types';
+	import { page } from '$app/state';
 
-	let { data } = $props();
+	let data = $derived(page.data as PageData);
 
-	// Calculate active years for role history
 	function getActiveYears(roleHistory: typeof data.roleHistory) {
 		const years = new Set<number>();
 		roleHistory.forEach(({ userRole }) => {

@@ -2,7 +2,7 @@
 	import UserView from './components/user-view.svelte';
 	import GuestView from './components/guest-view.svelte';
 
-	let { data, form } = $props();
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -15,8 +15,8 @@
 	</h1>
 
 	{#if data.isOwnProfile}
-		<UserView {data} {form} />
+		<UserView />
 	{:else}
-		<GuestView {data} />
+		<GuestView />
 	{/if}
 </div>

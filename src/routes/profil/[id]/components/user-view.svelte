@@ -4,8 +4,11 @@
 	import Button from '$lib/components/button.svelte';
 	import Label from '$lib/components/label.svelte';
 	import Input from '$lib/components/input.svelte';
+	import type { ActionData, PageData } from '../$types';
+	import { page } from '$app/state';
 
-	let { data, form } = $props();
+	let data = page.data as PageData;
+	let form = page.form as ActionData;
 
 	let isSubmitting = $state(false);
 
@@ -34,22 +37,26 @@
 	// Update form fields when form prop changes (after server validation)
 	$effect(() => {
 		if (form) {
-			name = form.name || data.user.name;
-			email = form.email || data.user.email;
+			name = page.form.name || page.data.user.name;
+			email = page.form.email || page.data.user.email;
 			activeFromMonth =
-				form.activeFromMonth ||
-				(data.user.activeFrom ? String(new Date(data.user.activeFrom).getMonth() + 1) : '');
+				page.form.activeFromMonth ||
+				(page.data.user.activeFrom
+					? String(new Date(page.data.user.activeFrom).getMonth() + 1)
+					: '');
 			activeFromYear =
-				form.activeFromYear ||
-				(data.user.activeFrom ? String(new Date(data.user.activeFrom).getFullYear()) : '');
+				page.form.activeFromYear ||
+				(page.data.user.activeFrom
+					? String(new Date(page.data.user.activeFrom).getFullYear())
+					: '');
 			activeToMonth =
-				form.activeToMonth ||
-				(data.user.activeTo ? String(new Date(data.user.activeTo).getMonth() + 1) : '');
+				page.form.activeToMonth ||
+				(page.data.user.activeTo ? String(new Date(page.data.user.activeTo).getMonth() + 1) : '');
 			activeToYear =
-				form.activeToYear ||
-				(data.user.activeTo ? String(new Date(data.user.activeTo).getFullYear()) : '');
-			currentRoleId = form.currentRoleId || data.user.currentRoleId || '';
-			isPublic = form.isPublic !== undefined ? form.isPublic : data.user.isPublic;
+				page.form.activeToYear ||
+				(page.data.user.activeTo ? String(new Date(page.data.user.activeTo).getFullYear()) : '');
+			currentRoleId = page.form.currentRoleId || page.data.user.currentRoleId || '';
+			isPublic = page.form.isPublic !== undefined ? page.form.isPublic : page.data.user.isPublic;
 		}
 	});
 	let isUploadingImage = $state(false);
