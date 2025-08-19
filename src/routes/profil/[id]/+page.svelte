@@ -318,7 +318,7 @@
 							bind:value={currentRoleId}
 						>
 							<option value="">Ingen rolle</option>
-							{#each data.availableRoles as role}
+							{#each data.availableRoles as role (role.id)}
 								<option value={role.id}>{role.name}</option>
 							{/each}
 						</select>
