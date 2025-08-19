@@ -179,10 +179,9 @@
 												);
 											}
 										}}
+										value={attendanceData?.status ?? ''}
 									>
-										<option value="" class="bg-dropdown text-foreground">
-											{attendanceData?.status || 'Velg status'}
-										</option>
+										<option value="" class="bg-dropdown text-foreground"> Velg status </option>
 										{#each data.statuses as status (status.id)}
 											<option value={status.id} class="bg-dropdown text-foreground">
 												{status.name}
