@@ -14,49 +14,51 @@
 		<h1 class="text-foreground text-3xl font-bold">Medlemmer</h1>
 	</div>
 
-	<div class="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 		{#each data.users as user (user.id)}
 			<div class="bg-card border-border overflow-hidden rounded-lg border transition-colors">
-				<!-- Profile Picture -->
-				<div class="w-full">
-					{#if user.imageUrl}
-						<img
-							src={user.imageUrl}
-							alt="{user.name}s profilbilde"
-							class="mx-auto h-56 object-cover"
-						/>
-					{:else}
-						<div class="bg-muted flex h-56 items-center justify-center">
-							<Users size={48} class="text-muted-foreground" />
-						</div>
-					{/if}
-				</div>
+				<div class="flex">
+					<!-- Profile Picture -->
+					<div class="bg-muted flex-shrink-0">
+						{#if user.imageUrl}
+							<img
+								src={user.imageUrl}
+								alt="{user.name}s profilbilde"
+								class="aspect-[2/3] h-48 object-cover"
+							/>
+						{:else}
+							<div class="bg-muted flex aspect-[2/3] h-48 items-center justify-center">
+								<Users size={40} class="text-muted-foreground" />
+							</div>
+						{/if}
+					</div>
 
-				<!-- User Info -->
-				<div class="border-border border-t p-6">
-					<h3 class="text-foreground text-lg font-semibold break-words">
-						<a
-							href="/profil/{user.id}"
-							class="text-foreground hover:text-primary transition-all hover:underline"
-						>
-							{user.name}
-						</a>
-					</h3>
-					<p class="text-muted-foreground text-sm break-all">{user.email}</p>
-					{#if user.activeFrom}
-						<p class="text-muted-foreground mt-2 text-xs">
-							{new Date(user.activeFrom).toLocaleDateString('no-NO', {
-								month: 'short',
-								year: 'numeric'
-							})} -
-							{user.activeTo
-								? new Date(user.activeTo).toLocaleDateString('no-NO', {
-										month: 'short',
-										year: 'numeric'
-									})
-								: 'nåværende'}
-						</p>
-					{/if}
+					<!-- User Info -->
+					<div class="border-border flex-1 border-l p-6">
+						<h3 class="text-foreground text-lg font-semibold break-words">
+							<a
+								href="/profil/{user.id}"
+								class="text-foreground hover:text-primary transition-all hover:underline"
+							>
+								{user.name}
+							</a>
+						</h3>
+						<p class="text-muted-foreground text-sm break-all">{user.email}</p>
+						{#if user.activeFrom}
+							<p class="text-muted-foreground mt-2 text-xs">
+								{new Date(user.activeFrom).toLocaleDateString('no-NO', {
+									month: 'short',
+									year: 'numeric'
+								})} -
+								{user.activeTo
+									? new Date(user.activeTo).toLocaleDateString('no-NO', {
+											month: 'short',
+											year: 'numeric'
+										})
+									: 'nåværende'}
+							</p>
+						{/if}
+					</div>
 				</div>
 			</div>
 		{/each}

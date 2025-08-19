@@ -1,10 +1,8 @@
 import { redirect, error } from '@sveltejs/kit';
-import { db } from '$lib/db/drizzle';
-import { sessions } from '$lib/db/schemas';
-import { nanoid } from 'nanoid';
 import type { PageServerLoad } from './$types';
 import { SESSION_COOKIE_NAME } from '$lib/config';
 import { MagicLinkService } from '$lib/services/magic-link-service';
+import { SessionService } from '$lib/services/session-service';
 
 export const load: PageServerLoad = async ({ url, cookies }) => {
 	const token = url.searchParams.get('token');
@@ -20,16 +18,14 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
 		error(400, validation.error || 'Invalid magic link');
 	}
 
-	// Create a new session
-	const sessionId = nanoid();
-	const expiresAt = new Date();
-	expiresAt.setDate(expiresAt.getDate() + 30); // 30 days from now
+	if (!validation.userId) {
+		error(400, 'Magic link has expired');
+	}
 
-	await db.insert(sessions).values({
-		id: sessionId,
-		userId: validation.userId!,
-		expiresAt
-	});
+	await MagicLinkService.deleteMagicLink(token);
+
+	// Create a new session
+	const { id: sessionId } = await SessionService.create(validation.userId);
 
 	// Set session cookie
 	cookies.set(SESSION_COOKIE_NAME, sessionId, {

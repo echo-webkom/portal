@@ -107,4 +107,12 @@ export class MagicLinkService {
 			console.error('Error cleaning up expired magic links:', error);
 		}
 	}
+
+	static async deleteMagicLink(token: string): Promise<void> {
+		try {
+			await db.delete(magicLinks).where(eq(magicLinks.id, token));
+		} catch (error) {
+			console.error('Error deleting magic link:', error);
+		}
+	}
 }

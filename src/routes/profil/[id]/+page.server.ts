@@ -50,12 +50,24 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	// Get all available roles
 	const availableRoles = await db.select().from(roles).orderBy(roles.name);
 
+	// Get user's role history (for viewing other profiles)
+	const roleHistory = await db
+		.select({
+			role: roles,
+			userRole: userRoles
+		})
+		.from(userRoles)
+		.innerJoin(roles, eq(userRoles.roleId, roles.id))
+		.where(eq(userRoles.userId, params.id))
+		.orderBy(desc(userRoles.startDate));
+
 	return {
 		user: profileUser[0].user,
 		currentRole: profileUser[0].currentRole,
 		currentUser: locals.user,
 		recentAttendance,
 		availableRoles,
+		roleHistory,
 		isOwnProfile: locals.user.id === params.id
 	};
 };

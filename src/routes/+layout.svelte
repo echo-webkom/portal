@@ -16,7 +16,7 @@
 
 <div class="flex min-h-screen w-full flex-col">
 	<Header />
-	<div class="flex-1 px-4 py-8 md:px-8">
+	<div class="flex-1 px-4 py-8 pb-16 md:px-8 md:pb-24">
 		{@render children()}
 	</div>
 	<footer class="bg-card border-border border-t py-6">
